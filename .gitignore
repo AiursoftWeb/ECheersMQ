@@ -1,0 +1,15 @@
+.vs
+lib
+*.lock.json
+package-lock.json
+*.user
+*.min.css
+*.min.js
+bin
+obj
+node_modules
+.vscode
+Properties
+npm-debug.log
+yarn.lock
+bundle.js
