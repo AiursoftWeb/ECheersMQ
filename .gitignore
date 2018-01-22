@@ -13,3 +13,4 @@ Properties
 npm-debug.log
 yarn.lock
 bundle.js
+*.db
