@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mq.Models.ManageViewModels
+namespace Echeers.Mq.Models.ManageViewModels
 {
     public class IndexViewModel
     {

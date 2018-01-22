@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Mq.Models;
-using Mq.Models.AccountViewModels;
-using Mq.Services;
+using Echeers.Mq.Models;
+using Echeers.Mq.Models.AccountViewModels;
+using Echeers.Mq.Services;
 
-namespace Mq.Controllers
+namespace Echeers.Mq.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]

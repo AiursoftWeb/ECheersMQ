@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Mq.Data;
-using Mq.Models;
-using Mq.Services;
+using Echeers.Mq.Data;
+using Echeers.Mq.Models;
+using Echeers.Mq.Services;
 
-namespace Mq
+namespace Echeers.Mq
 {
     public class Startup
     {

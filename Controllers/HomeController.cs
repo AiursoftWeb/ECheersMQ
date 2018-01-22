@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Mq.Models;
+using Echeers.Mq.Models;
 
-namespace Mq.Controllers
+namespace Echeers.Mq.Controllers
 {
     public class HomeController : Controller
     {

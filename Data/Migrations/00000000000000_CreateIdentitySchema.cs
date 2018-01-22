@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Mq.Data.Migrations
+namespace Echeers.Mq.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

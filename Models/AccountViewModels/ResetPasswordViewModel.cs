@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mq.Models.AccountViewModels
+namespace Echeers.Mq.Models.AccountViewModels
 {
     public class ResetPasswordViewModel
     {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Mq.Models.ManageViewModels
+namespace Echeers.Mq.Models.ManageViewModels
 {
     public class EnableAuthenticatorViewModel
     {

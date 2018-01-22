@@ -1,6 +1,6 @@
 using System;
 
-namespace Mq.Models
+namespace Echeers.Mq.Models
 {
     public class ErrorViewModel
     {

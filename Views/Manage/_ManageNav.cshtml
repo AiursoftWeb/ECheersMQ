@@ -1,4 +1,4 @@
-﻿@using Mq.Views.Manage
+﻿@using Echeers.Mq.Views.Manage
 @inject SignInManager<ApplicationUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();

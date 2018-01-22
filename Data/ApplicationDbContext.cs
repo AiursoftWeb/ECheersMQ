@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Mq.Models;
+using Echeers.Mq.Models;
 
-namespace Mq.Data
+namespace Echeers.Mq.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

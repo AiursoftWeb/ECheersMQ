@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 
-namespace Mq.Models.ManageViewModels
+namespace Echeers.Mq.Models.ManageViewModels
 {
     public class ExternalLoginsViewModel
     {
