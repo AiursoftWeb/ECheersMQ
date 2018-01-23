@@ -20,8 +20,8 @@ namespace Echeers.Mq.Controllers
     [Route("[controller]/[action]")]
     public class ManageController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<MqUser> _userManager;
+        private readonly SignInManager<MqUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
@@ -30,8 +30,8 @@ namespace Echeers.Mq.Controllers
         private const string RecoveryCodesKey = nameof(RecoveryCodesKey);
 
         public ManageController(
-          UserManager<ApplicationUser> userManager,
-          SignInManager<ApplicationUser> signInManager,
+          UserManager<MqUser> userManager,
+          SignInManager<MqUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
           UrlEncoder urlEncoder)
@@ -527,7 +527,7 @@ namespace Echeers.Mq.Controllers
                 unformattedKey);
         }
 
-        private async Task LoadSharedKeyAndQrCodeUriAsync(ApplicationUser user, EnableAuthenticatorViewModel model)
+        private async Task LoadSharedKeyAndQrCodeUriAsync(MqUser user, EnableAuthenticatorViewModel model)
         {
             var unformattedKey = await _userManager.GetAuthenticatorKeyAsync(user);
             if (string.IsNullOrEmpty(unformattedKey))

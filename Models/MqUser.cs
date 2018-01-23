@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 namespace Echeers.Mq.Models
 {
     // Add profile data for application users by adding properties to the ApplicationUser class
-    public class ApplicationUser : IdentityUser
+    public class MqUser : IdentityUser
     {
         [InverseProperty(nameof(App.Owner))]
         public IEnumerable<App> Apps { get; set; }

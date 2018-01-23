@@ -8,7 +8,7 @@ using Echeers.Mq.Models;
 
 namespace Echeers.Mq.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<MqUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
