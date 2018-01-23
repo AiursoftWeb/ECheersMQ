@@ -65,7 +65,7 @@ namespace Echeers.Mq.Controllers
             }
             else
             {
-                return Protocal(ErrorType.Success, "Current Info.");
+                return Protocal(ErrorType.Success, "Corrent Info.");
             }
         }
 

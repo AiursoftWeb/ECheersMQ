@@ -182,7 +182,7 @@
     // 频道存在且连接Key正确
     {
         "code": 0,
-        "message": "Current Info."
+        "message": "Corrent Info."
     }
 
     // 频道存在但Key不正确
@@ -225,3 +225,24 @@
         "code": 0,
         "message": "You have successfully created a message at channel:2!"
     }
+
+### 收听一个频道
+
+请求地址：
+
+    ws://localhost:5000/Listen/Channel/{Your Channel Id}?Key={Connect Key}
+
+请求方法：
+
+    WebSocket
+
+注意：
+    如果你的站点已经支持了HTTPS，请将地址中的`ws`改为`wss`。
+
+说明：
+
+使用WebSocket连接后，所有该频道的消息都会通过WebSocket的onmessage事件被客户端触发。请参考[前端调用方法](./Views/Home/Test.cshtml)。
+
+如果你想调试你的WebSocket接口而不想开发任何代码，可以使用你喜爱的浏览器访问`/Home/Test`。这里是一个非常简洁的WebSocket客户端。
+
+服务器只会把最原生的事件内容推送过来，不会进行任何编码，也不会使用Json或XML。
