@@ -5,6 +5,6 @@ namespace Echeers.Mq.Data
 {
     public static class MqMemoryContext
     {
-        public static List<Message> Messages { get; set; }
+        public static List<Message> Messages { get; set; } = new List<Message>();
     }
 }

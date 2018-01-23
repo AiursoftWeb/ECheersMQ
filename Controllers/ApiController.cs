@@ -25,22 +25,18 @@ namespace Echeers.Mq.Controllers
         private readonly SignInManager<MqUser> _signInManager;
         private readonly ILogger _logger;
         private readonly MqDbContext _dbContext;
-        private readonly IStringLocalizer<ApiController> _localizer;
 
         public ApiController(
             UserManager<MqUser> userManager,
             SignInManager<MqUser> signInManager,
             ILoggerFactory loggerFactory,
-            MqDbContext _context,
-            IStringLocalizer<ApiController> localizer)
+            MqDbContext _context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = loggerFactory.CreateLogger<ApiController>();
             _dbContext = _context;
-            _localizer = localizer;
         }
-
 
         public async Task<IActionResult> AccessToken(AccessTokenAddressModel model)
         {
@@ -50,7 +46,7 @@ namespace Echeers.Mq.Controllers
                 return Json(new AiurProtocal
                 {
                     code = ErrorType.Unauthorized,
-                    message = "Wrong accesstoken!"
+                    message = "Wrong app id or app secret!"
                 });
             }
             var newAC = new AccessToken

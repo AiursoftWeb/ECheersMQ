@@ -115,33 +115,5 @@ namespace Echeers.Mq.Controllers
             await _dbContext.SaveChangesAsync();
             return Json(new AiurProtocal { code = ErrorType.Success, message = "Successfully deleted your channel!" });
         }
-
-        /// <summary>
-        /// This action will delete all channels he created!
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<IActionResult> DeleteApp([FromForm]DeleteAppAddressModel model)
-        {
-            var token = await _dbContext.AccessTokens.Include(t => t.ApplyApp).SingleOrDefaultAsync(t => t.Value == model.AccessToken);
-            if (token == null || token.ApplyApp == null)
-            {
-                return Protocal(ErrorType.Unauthorized, "Invalid accesstoken!");
-            }
-            if (token.ApplyAppId != model.AppId)
-            {
-                return Json(new AiurProtocal { code = ErrorType.Unauthorized, message = "The app you try to delete is not the accesstoken you granted!" });
-            }
-            var target = await _dbContext.Apps.FindAsync(token.ApplyAppId);
-            if (target != null)
-            {
-                _dbContext.Channels.Delete(t => t.AppId == target.Id);
-                _dbContext.Apps.Remove(target);
-                await _dbContext.SaveChangesAsync();
-                return Json(new AiurProtocal { code = ErrorType.Success, message = "Successfully deleted that app and all channels." });
-            }
-            return Json(new AiurProtocal { code = ErrorType.HasDoneAlready, message = "That app do not exists in our database." });
-        }
     }
 }

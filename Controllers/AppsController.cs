@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Aiursoft.Pylon.Services;
 using Echeers.Mq.Data;
 using Echeers.Mq.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -78,6 +79,7 @@ namespace Echeers.Mq.Controllers
             {
                 return Unauthorized();
             }
+            _dbContext.Channels.Delete(t => t.AppId == app.Id);
             _dbContext.Apps.Remove(app);
             await _dbContext.SaveChangesAsync();
             return RedirectToAction(nameof(MyApps));

@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Echeers.Mq.Data;
 using Echeers.Mq.Models;
 using Aiursoft.Pylon.Services;
+using Echeers.Mq.Services;
 
 namespace Echeers.Mq
 {
@@ -34,7 +35,8 @@ namespace Echeers.Mq
             services.AddIdentity<MqUser, IdentityRole>()
                 .AddEntityFrameworkStores<MqDbContext>()
                 .AddDefaultTokenProviders();
-
+            services.AddTransient<WebSocketPusher>();
+            services.AddTransient<DataCleaner>();
             services.AddMvc();
         }
 
