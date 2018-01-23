@@ -53,12 +53,34 @@ namespace Echeers.Mq.Controllers
         public async Task<IActionResult> Delete(string id)
         {
             var app = await _dbContext.Apps.FindAsync(id);
+            if (app == null)
+            {
+                return NotFound();
+            }
             var user = await GetCurrentUserAsync();
             if (app.OwnerId != user.Id)
             {
                 return Unauthorized();
             }
             return View(app);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(App model)
+        {
+            var app = await _dbContext.Apps.FindAsync(model.Id);
+            if (app == null)
+            {
+                return NotFound();
+            }
+            var user = await GetCurrentUserAsync();
+            if (app.OwnerId != user.Id)
+            {
+                return Unauthorized();
+            }
+            _dbContext.Apps.Remove(app);
+            await _dbContext.SaveChangesAsync();
+            return RedirectToAction(nameof(MyApps));
         }
 
         public Task<MqUser> GetCurrentUserAsync()

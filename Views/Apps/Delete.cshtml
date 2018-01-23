@@ -1,4 +1,4 @@
-@model Echeers.Mq.Model.App
+@model Echeers.Mq.Models.App
 
 @{
     ViewData["Title"] = "Delete";
@@ -6,11 +6,11 @@
 
 <h2>Delete an App</h2>
 
-<h3>Warning! Once you deleted this app, you will lose all its channels and messages.</h3>
+<p>Warning! Once you deleted `@Model.Name`, you will lose all its channels and messages.</h3>
 <div>
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Name" />
-        <input type="submit" value="Ensure to delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to list</a>
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Sure to delete" class="btn btn-danger" /> 
     </form>
+    <a asp-action="MyApps">Back to list</a>
 </div>

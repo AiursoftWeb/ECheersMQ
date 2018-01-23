@@ -38,7 +38,7 @@
                 <i class="fa fa-database fa-2x"></i> @Html.DisplayFor(modelItem => item.Secret)
             </td>
             <td>
-                <a class="btn btn-danger" asp-action="Delete">Delete</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
