@@ -52,6 +52,7 @@ namespace Echeers.Mq
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseWebSockets();
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseMvcWithDefaultRoute();

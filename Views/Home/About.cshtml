@@ -1,7 +1,39 @@
-﻿@{
-    ViewData["Title"] = "About";
-}
+﻿@{ ViewData["Title"] = "About"; }
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
-<p>Use this area to provide additional information.</p>
+<p>Use this area to test your websocket api.</p>
+
+<input type="number" id="id">
+<input type="text" id="key">
+<button onclick="trigger()">Connect</button>
+WebSocket Connection Test
+<script>
+    function GetWSAddress() {
+        var ishttps = 'https:' == document.location.protocol ? true : false;
+        var host = window.location.host;
+        var head = ishttps ? "wss://" : "ws://"
+        return head + host;
+    }
+    var webSocket;
+    var connect = function (id, key) {
+        webSocket = new WebSocket(GetWSAddress() + "/Listen/Channel/" + id + "?Key=" + key);
+        webSocket.onopen = function () {
+            $("#spanStatus").text("connected");
+        };
+        webSocket.onmessage = function (evt) {
+            window.scrollTo(0, document.body.scrollHeight);
+            $("#spanStatus").append('<p>' + evt.data + '</p>');
+        };
+        webSocket.onerror = function (evt) {
+            alert('Can not connect！');
+        };
+        webSocket.onclose = function () {
+            $("#spanStatus").text("disconnected");
+        };
+    };
+    var trigger = function () {
+        connect($('#id').val(), $('#key').val());
+    }
+</script>
+<div id="spanStatus"></div>
