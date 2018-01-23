@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Echeers.Mq.Data;
 using Echeers.Mq.Models;
-using Echeers.Mq.Services;
 
 namespace Echeers.Mq
 {
@@ -33,9 +32,6 @@ namespace Echeers.Mq
                 .AddEntityFrameworkStores<MqDbContext>()
                 .AddDefaultTokenProviders();
 
-            // Add application services.
-            services.AddTransient<IEmailSender, EmailSender>();
-
             services.AddMvc();
         }
 
@@ -51,17 +47,9 @@ namespace Echeers.Mq
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
             app.UseStaticFiles();
-
             app.UseAuthentication();
-
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvcWithDefaultRoute();
         }
     }
 }
