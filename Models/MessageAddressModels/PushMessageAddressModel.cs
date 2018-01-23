@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Aiursoft.Pylon.Models.Stargate.MessageAddressModels
+namespace Echeers.Mq.Models.MessageAddressModels
 {
     public class PushMessageAddressModel
     {

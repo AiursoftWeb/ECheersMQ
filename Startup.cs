@@ -10,11 +10,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Echeers.Mq.Data;
 using Echeers.Mq.Models;
+using Aiursoft.Pylon.Services;
 
 namespace Echeers.Mq
 {
     public class Startup
     {
+        public static Counter MessageIdCounter { get; set; } = new Counter();
+        public static Counter ListenerIdCounter { get; set; } = new Counter();
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
