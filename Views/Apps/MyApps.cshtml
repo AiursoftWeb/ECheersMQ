@@ -1,0 +1,46 @@
+@model IEnumerable<Echeers.Mq.Models.App>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Apps list</h2>
+
+<p>These are all apps you created.</p>
+<p>
+    <a class="btn btn-success" asp-action="Create">Create new app</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                   AppName
+                </th>
+                <th>
+                   AppId
+                </th>
+                <th>
+                   AppSecret
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <i class="fa fa-database fa-2x"></i> @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <i class="fa fa-database fa-2x"></i> @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                <i class="fa fa-database fa-2x"></i> @Html.DisplayFor(modelItem => item.Secret)
+            </td>
+            <td>
+                <a class="btn btn-danger" asp-action="Delete">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

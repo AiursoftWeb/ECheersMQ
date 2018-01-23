@@ -2,12 +2,14 @@ using System;
 using System.Threading.Tasks;
 using Echeers.Mq.Data;
 using Echeers.Mq.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Echeers.Mq.Controllers
 {
+    [Authorize]
     public class AppsController : Controller
     {
         private readonly MqDbContext _dbContext;
@@ -24,6 +26,25 @@ namespace Echeers.Mq.Controllers
         {
             var user = await GetCurrentUserAsync();
             return View(user.Apps);
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(App model)
+        {
+            var user = await GetCurrentUserAsync();
+            if(!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var app = new App(user.Id, model.Name);
+            _dbContext.Apps.Add(app);
+            await _dbContext.SaveChangesAsync();
+            return RedirectToAction(nameof(MyApps));
         }
 
         public Task<MqUser> GetCurrentUserAsync()
