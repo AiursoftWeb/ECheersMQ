@@ -13,6 +13,7 @@ namespace Echeers.Mq.Models
         {
             this.Id = (seed + DateTime.Now.ToString()).GetMD5();
             this.Secret = (seed + this.Id + DateTime.Now.ToString() + StringOperation.RandomString(15)).GetMD5();
+            this.Name = name;
         }
         public string Id { get; set; }
         public string Secret { get; set; }

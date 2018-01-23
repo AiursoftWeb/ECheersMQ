@@ -1,5 +1,5 @@
 ﻿@using Echeers.Mq.Views.Manage
-@inject SignInManager<ApplicationUser> SignInManager
+@inject SignInManager<MqUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
