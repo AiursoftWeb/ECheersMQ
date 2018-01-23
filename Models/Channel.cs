@@ -12,8 +12,8 @@ namespace Echeers.Mq.Models
         public int Id { get; set; }
         public string Description { get; set; }
         public string ConnectKey { get; set; }
-        public DateTime CreateTime { get; set; }
-        public TimeSpan LifeTime { get; set; }
+        public DateTime CreateTime { get; set; } = DateTime.Now;
+        public TimeSpan LifeTime { get; set; } = new TimeSpan(days: 0, hours: 23, minutes: 59, seconds: 59);
         public string AppId { get; set; }
         [ForeignKey("AppId")]
         [JsonIgnore]

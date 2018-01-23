@@ -12,7 +12,10 @@ namespace Echeers.Mq.Models
         [Key]
         public virtual int AccessTokenId { get; set; }
         public virtual string Value { get; set; }
+
         public virtual string ApplyAppId { get; set; }
+        [ForeignKey(nameof(ApplyAppId))]
+        public virtual App ApplyApp{get;set;}
 
         public virtual DateTime CreateTime { get; set; } = DateTime.Now;
         public virtual TimeSpan AliveTime { get; set; } = new TimeSpan(0, 20, 0);

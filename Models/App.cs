@@ -26,6 +26,7 @@ namespace Echeers.Mq.Models
         public MqUser Owner { get; set; }
 
         public IEnumerable<Channel> Channels { get; set; }
+        public IEnumerable<AccessToken> AccessTokens { get; set; }
 
     }
 }
