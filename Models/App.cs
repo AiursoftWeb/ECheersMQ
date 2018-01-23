@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Aiursoft.Pylon.Services;
@@ -23,6 +24,8 @@ namespace Echeers.Mq.Models
         public string OwnerId { get; set; }
         [ForeignKey(nameof(OwnerId))]
         public MqUser Owner { get; set; }
+
+        public IEnumerable<Channel> Channels { get; set; }
 
     }
 }
