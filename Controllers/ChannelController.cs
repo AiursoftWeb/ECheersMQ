@@ -13,7 +13,6 @@ using Echeers.Mq.Models.ListenAddressModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace Echeers.Mq.Controllers
 {
     public class ChannelController : AiurController
