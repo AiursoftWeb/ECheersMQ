@@ -7,9 +7,9 @@ using Aiursoft.Pylon.Models;
 using Aiursoft.Pylon.Services;
 using Echeers.Mq.Data;
 using Echeers.Mq.Models;
-using ECheers.Mq.Models.ChannelAddressModels;
-using ECheers.Mq.Models.ChannelViewModels;
-using ECheers.Mq.Models.ListenAddressModels;
+using Echeers.Mq.Models.ChannelAddressModels;
+using Echeers.Mq.Models.ChannelViewModels;
+using Echeers.Mq.Models.ListenAddressModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

@@ -17,7 +17,7 @@ using Echeers.Mq.Models.ApiAddressModels;
 using Aiursoft.Pylon.Services;
 using Echeers.Mq.Models.ApiViewModels;
 
-namespace ECheers.Mq.Controllers
+namespace Echeers.Mq.Controllers
 {
     public class ApiController : Controller
     {

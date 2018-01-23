@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ECheers.Mq.Models.ListenAddressModels
+namespace Echeers.Mq.Models.ListenAddressModels
 {
     public class ChannelAddressModel
     {

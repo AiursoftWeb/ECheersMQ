@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Aiursoft.Pylon.Models;
 
-namespace ECheers.Mq.Models.ChannelViewModels
+namespace Echeers.Mq.Models.ChannelViewModels
 {
     public class CreateChannelViewModel : AiurProtocal
     {

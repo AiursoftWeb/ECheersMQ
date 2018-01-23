@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ECheers.Mq.Models.ChannelAddressModels
+namespace Echeers.Mq.Models.ChannelAddressModels
 {
     public class DeleteAppAddressModel
     {

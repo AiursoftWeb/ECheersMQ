@@ -23,5 +23,6 @@ namespace Echeers.Mq.Data
         public DbSet<App> Apps { get; set; }
         public DbSet<AccessToken> AccessTokens { get; set; }
         public DbSet<Channel> Channels { get; set; }
+        public DbSet<Message> Messages { get; set; }
     }
 }

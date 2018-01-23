@@ -4,7 +4,7 @@ using System.Text;
 using Aiursoft.Pylon.Models;
 using Echeers.Mq.Models;
 
-namespace ECheers.Mq.Models.ChannelViewModels
+namespace Echeers.Mq.Models.ChannelViewModels
 {
     public class ViewMyChannelsViewModel : AiurProtocal
     {
