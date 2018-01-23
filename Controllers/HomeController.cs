@@ -15,10 +15,8 @@ namespace Echeers.Mq.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult Test()
         {
-            ViewData["Message"] = "Your application description page.";
-
             return View();
         }
 

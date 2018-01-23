@@ -1,0 +1,53 @@
+﻿@{ ViewData["Title"] = "Connection Test"; }
+<h2>@ViewData["Title"]</h2>
+<p>Use this area to test your websocket api.</p>
+<div class="row">
+    <div class="col-md-4">
+        <h4>Use your channel id and key to connect.</h4>
+        <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label>Channel Id</label>
+            <input value="1" type="number" id="id" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Connect key</label>
+            <input type="password" id="key" class="form-control" />
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success" onclick="trigger()">Connect</button>
+        </div>
+        <kdb id="spanStatus" class="text-danger">Waiting</kdb>
+    </div>
+    <div class="col-md-6">
+        <div id="message"></div>
+    </div>
+</div>
+<script>
+    function GetWSAddress() {
+        var ishttps = 'https:' == document.location.protocol ? true : false;
+        var host = window.location.host;
+        var head = ishttps ? "wss://" : "ws://"
+        return head + host;
+    }
+    var connect = function (id, key) {
+        var target = GetWSAddress() + "/Listen/Channel/" + id + "?Key=" + key;
+        var webSocket = new WebSocket(target);
+        webSocket.onopen = function () {
+            $("#spanStatus").text("Connected to "+target);
+        };
+        webSocket.onmessage = function (evt) {
+            window.scrollTo(0, document.body.scrollHeight);
+            $("#message").append('<p>' + evt.data + '</p>');
+        };
+        webSocket.onerror = function (evt) {
+            alert('Can not connect！');
+        };
+        webSocket.onclose = function () {
+            $("#spanStatus").text("Disconnected!");
+        };
+    };
+    var trigger = function () {
+        connect($('#id').val(), $('#key').val());
+    }
+</script>
