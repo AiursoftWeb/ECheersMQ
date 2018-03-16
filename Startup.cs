@@ -36,7 +36,6 @@ namespace Echeers.Mq
                 .AddEntityFrameworkStores<MqDbContext>()
                 .AddDefaultTokenProviders();
             services.AddTransient<WebSocketPusher>();
-            services.AddTransient<DataCleaner>();
             services.AddMvc();
         }
 
