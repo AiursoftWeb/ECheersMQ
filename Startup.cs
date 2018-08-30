@@ -30,7 +30,7 @@ namespace Echeers.Mq
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MqDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<MqUser, IdentityRole>()
                 .AddEntityFrameworkStores<MqDbContext>()
