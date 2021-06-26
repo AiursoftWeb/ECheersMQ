@@ -1,15 +1,11 @@
-﻿using Aiursoft.Pylon.Models;
-using Aiursoft.Pylon.Services;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Http;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
+using Aiursoft.XelNaga.Tools;
 
 namespace Echeers.Mq.Services
 {
-    public class WebSocketPusher : IPusher<WebSocket>
+    public class WebSocketPusher
     {
         private WebSocket _ws;
         public bool Connected => _ws.State == WebSocketState.Open;

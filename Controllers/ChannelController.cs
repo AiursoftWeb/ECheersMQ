@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Aiursoft.Pylon;
-using Aiursoft.Pylon.Models;
-using Aiursoft.Pylon.Services;
+using Aiursoft.Handler.Models;
+using Aiursoft.WebTools;
+using Aiursoft.XelNaga.Tools;
 using Echeers.Mq.Data;
 using Echeers.Mq.Models;
 using Echeers.Mq.Models.ChannelAddressModels;
@@ -15,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Echeers.Mq.Controllers
 {
-    public class ChannelController : AiurController
+    public class ChannelController : ControllerBase
     {
         private MqDbContext _dbContext;
         public ChannelController(MqDbContext dbContext)
@@ -28,20 +26,20 @@ namespace Echeers.Mq.Controllers
             var token = await _dbContext.AccessTokens.Include(t => t.ApplyApp).SingleOrDefaultAsync(t => t.Value == model.AccessToken);
             if (token == null || token.ApplyApp == null)
             {
-                return Protocal(ErrorType.Unauthorized, "Invalid accesstoken!");
+                return this.Protocol(ErrorType.Unauthorized, "Invalid accesstoken!");
             }
             var channels = await _dbContext
                 .Channels
                 .Where(t => t.AppId == token.ApplyAppId)
                 .ToListAsync();
-            var viewModel = new ViewMyChannelsViewModel
+
+            return this.Protocol(new ViewMyChannelsViewModel
             {
                 AppId = token.ApplyAppId,
                 Channel = channels,
-                code = ErrorType.Success,
-                message = "Successfully get your channels!"
-            };
-            return Json(viewModel);
+                Code = ErrorType.Success,
+                Message = "Successfully get your channels!"
+            });
         }
 
         public async Task<IActionResult> ValidateChannel(ChannelAddressModel model)
@@ -49,23 +47,15 @@ namespace Echeers.Mq.Controllers
             var channel = await _dbContext.Channels.FindAsync(model.Id);
             if (channel == null)
             {
-                return Json(new AiurProtocal
-                {
-                    code = ErrorType.NotFound,
-                    message = "Can not find your channel!"
-                });
+                return this.Protocol(ErrorType.NotFound, "Can not find your channel!");
             }
             if (channel.ConnectKey != model.Key)
             {
-                return Json(new AiurProtocal
-                {
-                    code = ErrorType.Unauthorized,
-                    message = "Wrong connection key!"
-                });
+                return this.Protocol(ErrorType.Unauthorized, "Wrong connection key!");
             }
             else
             {
-                return Protocal(ErrorType.Success, "Corrent Info.");
+                return this.Protocol(ErrorType.Success, "Corrent Info.");
             }
         }
 
@@ -75,7 +65,7 @@ namespace Echeers.Mq.Controllers
             var token = await _dbContext.AccessTokens.Include(t => t.ApplyApp).SingleOrDefaultAsync(t => t.Value == model.AccessToken);
             if (token == null || token.ApplyApp == null)
             {
-                return Protocal(ErrorType.Unauthorized, "Invalid accesstoken!");
+                return this.Protocol(ErrorType.Unauthorized, "Invalid accesstoken!");
             }
             //Create and save to database
             var newChannel = new Channel
@@ -86,15 +76,14 @@ namespace Echeers.Mq.Controllers
             };
             _dbContext.Channels.Add(newChannel);
             await _dbContext.SaveChangesAsync();
-            //return model
-            var viewModel = new CreateChannelViewModel
+
+            return this.Protocol(new CreateChannelViewModel
             {
                 ChannelId = newChannel.Id,
                 ConnectKey = newChannel.ConnectKey,
-                code = ErrorType.Success,
-                message = "Successfully created your channel!"
-            };
-            return Json(viewModel);
+                Code = ErrorType.Success,
+                Message = "Successfully created your channel!"
+            });
         }
 
         [HttpPost]
@@ -103,16 +92,17 @@ namespace Echeers.Mq.Controllers
             var token = await _dbContext.AccessTokens.Include(t => t.ApplyApp).SingleOrDefaultAsync(t => t.Value == model.AccessToken);
             if (token == null || token.ApplyApp == null)
             {
-                return Protocal(ErrorType.Unauthorized, "Invalid accesstoken!");
+                return this.Protocol(ErrorType.Unauthorized, "Invalid accesstoken!");
             }
             var channel = await _dbContext.Channels.FindAsync(model);
             if (channel.AppId != token.ApplyAppId)
             {
-                return Json(new AiurProtocal { code = ErrorType.Unauthorized, message = "The channel you try to delete is not your app's channel!" });
+                this.Protocol(ErrorType.Unauthorized, "The channel you try to delete is not your app's channel!");
             }
             _dbContext.Channels.Remove(channel);
             await _dbContext.SaveChangesAsync();
-            return Json(new AiurProtocal { code = ErrorType.Success, message = "Successfully deleted your channel!" });
+            
+            return this.Protocol(ErrorType.Success, "Successfully deleted your channel!");
         }
     }
 }

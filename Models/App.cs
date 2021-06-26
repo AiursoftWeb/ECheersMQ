@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Aiursoft.Pylon.Services;
+using Aiursoft.XelNaga.Tools;
 
 namespace Echeers.Mq.Models
 {

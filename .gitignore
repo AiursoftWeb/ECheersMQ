@@ -15,3 +15,5 @@ yarn.lock
 bundle.js
 *.db
 Migrations
+yarn.lock
+.idea
