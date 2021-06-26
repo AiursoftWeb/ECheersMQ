@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Aiursoft.Pylon.Models;
-using Echeers.Mq.Models;
+﻿using System.Collections.Generic;
+using Aiursoft.Handler.Models;
 
 namespace Echeers.Mq.Models.ChannelViewModels
 {
-    public class ViewMyChannelsViewModel : AiurProtocal
+    public class ViewMyChannelsViewModel : AiurProtocol
     {
         public string AppId { get; set; }
         public IEnumerable<Channel> Channel { get; set; }

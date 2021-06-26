@@ -1,13 +1,29 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aiursoft.Pylon" Version="0.5.0" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1" PrivateAssets="All" />
+    <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aiursoft.SDK" Version="5.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Manage\ChangePassword.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Manage\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Manage\_Layout.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Manage\_ManageNav.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Manage\_StatusMessage.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Manage\_ViewImports.cshtml" />
   </ItemGroup>
 
 </Project>

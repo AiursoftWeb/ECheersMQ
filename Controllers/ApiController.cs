@@ -1,20 +1,15 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Http;
-using System.Globalization;
-using Aiursoft.Pylon.Models;
+using Aiursoft.Handler.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Localization;
 using Microsoft.EntityFrameworkCore;
 using Echeers.Mq.Data;
 using Echeers.Mq.Models;
 using Echeers.Mq.Models.ApiAddressModels;
-using Aiursoft.Pylon.Services;
+using Aiursoft.WebTools;
+using Aiursoft.XelNaga.Tools;
 using Echeers.Mq.Models.ApiViewModels;
 
 namespace Echeers.Mq.Controllers
@@ -43,11 +38,7 @@ namespace Echeers.Mq.Controllers
             var app = await _dbContext.Apps.SingleOrDefaultAsync(t => t.Id == model.AppId && t.Secret == model.AppSecret);
             if (app == null)
             {
-                return Json(new AiurProtocal
-                {
-                    code = ErrorType.Unauthorized,
-                    message = "Wrong app id or app secret!"
-                });
+                return this.Protocol(ErrorType.Unauthorized, "Wrong app id or app secret!");
             }
             var newAC = new AccessToken
             {
@@ -56,10 +47,11 @@ namespace Echeers.Mq.Controllers
             };
             _dbContext.AccessTokens.Add(newAC);
             await _dbContext.SaveChangesAsync();
-            return Json(new AccessTokenViewModel
+
+            return this.Protocol(new AccessTokenViewModel
             {
-                code = ErrorType.Success,
-                message = "Successfully get access token.",
+                Code = ErrorType.Success,
+                Message = "Successfully get access token.",
                 AccessToken = newAC.Value,
                 DeadTime = newAC.CreateTime + newAC.AliveTime
             });

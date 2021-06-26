@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -10,8 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Echeers.Mq.Data;
 using Echeers.Mq.Models;
-using Aiursoft.Pylon.Services;
+using Aiursoft.XelNaga.Services;
 using Echeers.Mq.Services;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Hosting;
 
 namespace Echeers.Mq
 {
@@ -30,31 +29,55 @@ namespace Echeers.Mq
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MqDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<MqUser, IdentityRole>()
-                .AddEntityFrameworkStores<MqDbContext>()
-                .AddDefaultTokenProviders();
+            // https://github.com/aspnet/Identity/issues/1884
+            services.AddDefaultIdentity<MqUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<MqDbContext>();
+            
             services.AddTransient<WebSocketPusher>();
-            services.AddMvc();
+            
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                app.UseMigrationsEndPoint();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
             }
+
+            app.UseHttpsRedirection();
             app.UseWebSockets();
+            // app.UseStaticFiles(new StaticFileOptions
+            // {
+            //     FileProvider = new PhysicalFileProvider(
+            //         Path.Combine(env.ContentRootPath, "node_modules")),
+            //     RequestPath = "/node_modules"
+            // });
             app.UseStaticFiles();
+
+            app.UseRouting();
+            
             app.UseAuthentication();
-            app.UseMvcWithDefaultRoute();
+            app.UseAuthorization();
+            
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();  // for identity UI
+            });
         }
     }
 }

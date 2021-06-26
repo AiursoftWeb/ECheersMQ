@@ -1,24 +1,19 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Aiursoft.Pylon.Attributes;
-using Aiursoft.Pylon;
-using System.Net.WebSockets;
-using System.Text;
-using System.Threading;
+using Aiursoft.Handler.Models;
 using Echeers.Mq.Data;
 using Echeers.Mq.Services;
-using Aiursoft.Pylon.Models;
+using Aiursoft.WebTools;
 using Echeers.Mq.Models.ListenAddressModels;
 
 namespace Echeers.Mq.Controllers
 {
-    public class ListenController : AiurController
+    public class ListenController : Controller
     {
         private MqDbContext _dbContext;
-        private IPusher<WebSocket> _pusher;
+        private WebSocketPusher _pusher;
 
         public ListenController(MqDbContext dbContext,
             WebSocketPusher pusher)
@@ -27,18 +22,13 @@ namespace Echeers.Mq.Controllers
             _pusher = pusher;
         }
 
-        [AiurForceWebSocket]
         public async Task<IActionResult> Channel(ChannelAddressModel model)
         {
             var lastReadTime = DateTime.Now;
             var channel = await _dbContext.Channels.FindAsync(model.Id);
             if (channel.ConnectKey != model.Key)
             {
-                return Json(new AiurProtocal
-                {
-                    code = ErrorType.Unauthorized,
-                    message = "Wrong connection key!"
-                });
+                return this.Protocol(ErrorType.Unauthorized, "Wrong connection key!");
             }
             await _pusher.Accept(HttpContext);
             int sleepTime = 0;
