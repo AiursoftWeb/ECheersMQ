@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Aiursoft.SDK;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -38,7 +39,8 @@ namespace Echeers.Mq
             
             services.AddTransient<WebSocketPusher>();
             
-            services.AddControllersWithViews();
+            // services.AddControllersWithViews();
+            services.AddAiurMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
